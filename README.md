@@ -1,12 +1,22 @@
 # Hardening Linuxa – Projekt bezpieczeństwa
 
-## 1. Temat
-Wzmocnienie bezpieczeństwa systemu Linux i praktyczna nauka obrony przed atakami w sieci wirtualnej.
+## 1. Skład zespołu i role
 
-## 2. Cel projektu
-Projekt ma na celu wzmocnienie bezpieczeństwa serwera Debian poprzez audyt systemu, konfigurację usług SSH, UFW i Fail2ban oraz symulację prób logowania w kontrolowanym środowisku laboratoryjnym.
+| Rola          | Osoba                   | Zakres odpowiedzialności                |
+|---------------|-------------------------|-----------------------------------------|
+| Lider         | Monika Campoli (163319) | Planowanie, koordynacja, raport końcowy |
+| Inżynier      | Monika Campoli (163319) | Instalacja, SSH, UFW, Fail2ban, audyt   |
+| Dokumentujący | Monika Campoli (163319) | Logi, screenshoty, prezentacja          |
 
-## 3. Narzędzia
+*Na tę chwilę pracuję samodzielnie, dlatego pełnię wszystkie role. Powyższy podział ilustruje, jak role wyglądałyby w pracy zespołowej.*
+
+## 2. Temat
+Audyt i hardening bezpieczeństwa systemu Linux (Debian).
+
+## 3. Cel projektu
+Projekt ma na celu wzmocnienie bezpieczeństwa serwera Debian poprzez audyt systemu, konfigurację usług SSH, UFW i Fail2ban oraz opcjonalnie symulację prób logowania w kontrolowanym środowisku laboratoryjnym.
+
+## 4. Narzędzia
 - Debian Server – system docelowy do hardeningu
 - Ubuntu Desktop / Kali Linux / Debian – maszyna testowa do symulacji ataków
 - SSH – usługa zdalnego logowania
@@ -40,7 +50,7 @@ Przeprowadzenie wstępnego audytu systemu Debian 13 w celu zidentyfikowania luk 
 | Problem                      | Poziom ryzyka      |         Planowana naprawa            |
 |------------------------------|--------------------|--------------------------------------|
 | Brak firewalla (UFW)         |    Wysoki          | Instalacja i konfiguracja UFW        |
-| SSH na domyślnym porcie 22   |    Wysoki          | Zmiana portu na 2222                 |
+| SSH na domyślnym porcie 22   |    Średni          | Zmiana portu na 2222                 |
 | Brak Fail2ban                |    Średni          | Instalacja i konfiguracja Fail2ban   |
 | Brak automat. aktualizacji   |    Średni          | Konfiguracja unattended-upgrades     |
 | Słabe ustawienia SSH         |    Średni          | Hardening konfiguracji SSH           |
@@ -51,7 +61,7 @@ Przeprowadzenie wstępnego audytu systemu Debian 13 w celu zidentyfikowania luk 
 
 2. **Audyt potwierdza plan projektu** – wszystkie wykryte problemy są zgodne z zaplanowanymi działaniami (UFW, SSH, Fail2ban), co oznacza, że harmonogram jest trafny.
 
-3. **Potrzeba iteracyjnego podejścia** – po każdej zmianie konfiguracji należy powtarzać audyt, aby zmierzyć poprawę indeksu hardeningu.
+3. **Potrzeba iteracyjnego podejścia** – projekt przyjmuje iteracyjny model hardeningu, w którym każda zmiana konfiguracji jest weryfikowana poprzez ponowny audyt systemu.
 
 ### Plan na kolejny sprint
 
