@@ -8,7 +8,7 @@
 | Inżynier      | Monika Campoli (163319) | Instalacja, SSH, UFW, Fail2ban, audyt   |
 | Dokumentujący | Monika Campoli (163319) | Logi, screenshoty, prezentacja          |
 
-*Na tę chwilę pracuję samodzielnie, dlatego pełnię wszystkie role. Powyższy podział ilustruje, jak role wyglądałyby w pracy zespołowej.*
+*Projekt realizowany samodzielnie – wszystkie role pełni jedna osoba.*
 
 ## 2. Temat
 Audyt i hardening bezpieczeństwa systemu Linux (Debian).
@@ -79,3 +79,63 @@ Przeprowadzenie wstępnego audytu systemu Debian 13 w celu zidentyfikowania luk 
 - [Log audytu](results/1.lynis-raport.txt)
 - [Log audytu](results/1.lynis.log)
 
+
+## Sprint 2 – Hardening systemu (11 poprawek)
+
+### Cel sprintu
+Wdrożenie rzeczywistych zabezpieczeń systemu na podstawie wyników audytu ze Sprintu 1 oraz podniesienie wyniku Lynis do poziomu 80+.
+
+### Wprowadzone poprawki – lista
+
+| ID          | Obszar                    | Opis zmiany                                               |
+|-------------|---------------------------|-----------------------------------------------------------|
+| **FIX-001** | UFW (firewall)            | Instalacja i konfiguracja zapory; domyślnie blokuj ruch przychodzący, otwarty tylko SSH (2222)                                                                |
+| **FIX-002** | Hardening SSH             | Zmiana portu na 2222, ograniczenie prób logowania, wyłączenie X11Forwarding i forwarding                                                                 |
+| **FIX-003** | Fail2ban                  | Włączenie ochrony SSH i automatyczna blokada IP po błędnych logowaniach                                                                                  |
+| **FIX-004** | Automatyczne aktualizacje | Włączenie unattended-upgrades dla aktualizacji bezpieczeństwa                                                                                        |
+| **FIX-005** | Kernel hardening          | Zastosowanie sysctl: ochrona przed spoofingiem i wzmocnienie bezpieczeństwa sieci                                                                      |
+| **FIX-006** | /tmp hardening            | Aktywacja sticky bit w /tmp i /var/tmp                    |
+| **FIX-007** | Login banner              | Dodanie komunikatu bezpieczeństwa (/etc/issue, /etc/issue.net)                                                                                                  |
+| **FIX-008** | Auditd                    | Monitorowanie zmian w plikach systemowych (np. passwd, shadow, sshd_config)                                                                                  |
+| **FIX-009** | PAM (silne hasła)         | Wymuszenie minimalnej długości hasła (10 znaków)          |
+| **FIX-010** | Rsyslog                   | Pełne logowanie systemowe (auth, syslog, kern)            |
+| **FIX-011** | AIDE                      | Monitorowanie integralności plików systemowych            |
+
+📌 *Szczegółowe ścieżki mitygacji (pełne komendy, testy, wyniki) znajdują się w pliku `/docs/raport-koncowy.md`.*
+
+
+## Wynik końcowy (po hardeningu)
+
+| Wskaźnik          | Wartość |
+|-------------------|---------|
+| Hardening index   | 82/100  |
+| Warnings          | 0       |
+| Suggestions       | 31      |
+| Tests performed   | 262     |
+
+---
+
+## Porównanie Before & After
+
+| Obszar          | Sprint 1 | Sprint 2 | Zmiana   |
+|-----------------|----------|----------|----------|
+| Hardening index | 63/100   | 82/100   | **+19**  |
+| Warnings        | 1        | 0        | usunięty |
+| Firewall        | brak     | aktywny  |    +     |
+| Fail2ban        | brak     | aktywny  |    +     |
+| SSH port        | 22       | 2222     | zmieniony|
+
+---
+
+## Wnioski końcowe
+
+1. System został skutecznie utwardzony.
+2. Wzrost bezpieczeństwa uzyskano dzięki m.in. firewall + SSH + Fail2ban.
+3. System nadal posiada sugestie optymalizacyjne, ale brak krytycznych błędów.
+
+### Dowody wykonania hardeningu
+
+- [Audyt przed](results/1.Lynis-audyt.png)
+- [Audyt po](results/2.Lynis-audyt.png)
+- [Logi](results/sprint2-lynis.log)
+- [Log audytu](results/2.lynis-raport.txt)
