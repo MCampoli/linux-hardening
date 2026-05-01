@@ -64,9 +64,7 @@ echo "Audyt zakończony. Raport: $REPORT_FILE"
 echo "Czas wykonania: $DURATION sekund"
 ```
 
-# Opis szczegółowy – automatyzacja audytu Lynis
-
-## Opis działania skryptu
+## Opis szczegółowy – automatyzacja audytu Lynis
 
 | Element                        | Opis                                                           |
 |--------------------------------|----------------------------------------------------------------|
@@ -151,3 +149,4 @@ Zadanie Sprint #3 – automatyzacja audytu Lynis – zostało wykonane w pełni:
 - Pomiar czasu wykonania (155 sekund)
 - Porównanie z czasem ręcznym (0 vs 120-180 sekund)
 - Dokumentacja w repozytorium.
+

@@ -139,3 +139,33 @@ Wdrożenie rzeczywistych zabezpieczeń systemu na podstawie wyników audytu ze S
 - [Audyt po](results/2.Lynis-audyt.png)
 - [Logi](results/sprint2-lynis.log)
 - [Log audytu](results/2.lynis-raport.txt)
+
+## Sprint 3 – Automatyzacja audytu Lynis
+
+### Cel
+
+Celem zadania było zautomatyzowanie czynności wcześniej wykonywanej ręcznie – cotygodniowego audytu bezpieczeństwa systemu Debian 13 za pomocą narzędzia Lynis. Automatyzacja miała na celu:
+
+- Oszczędność czasu,
+- Eliminację błędów ludzkich,
+- Zapewnienie regularności audytów,
+- Stworzenie historii wyników.
+
+### Rozwiązanie
+
+#### Skrypt `auto-audit.sh`
+Skrypt wykonuje pełny audyt Lynis, mierzy czas wykonania i zapisuje raport z datą w nazwie.
+
+**Lokalizacja:** `src/auto-audit.sh`
+
+**Działanie:**
+- Tworzy katalog `results/auto-audit-logs/`
+- Zapisuje raport w formacie `lynis-auto-YYYYMMDD_HHMMSS.log`
+- Zapisuje czas wykonania w pliku `lynis-auto-YYYYMMDD_HHMMSS.time`
+
+#### Automatyzacja przez CRON
+Skrypt uruchamiany jest automatycznie co tydzień w niedzielę o 23:59.
+
+```bash
+59 23 * * 0 /home/monikac/linux-hardening/src/auto-audit.sh >> /home/monikac/linux-hardening/results/auto-audit-logs/cron.log 2>&1
+```

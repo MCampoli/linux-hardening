@@ -1,5 +1,9 @@
 # Sprint 2 – Szczegółowy opis poprawek (hardening systemu)
 
+**Autor:**          Monika Campoli  
+**Nr albumu:**      163319  
+**Data:**           02.04.2026 
+
 ## 🔧 FIX-001 – UFW (firewall) – SZCZEGÓŁOWO
 
 ---
