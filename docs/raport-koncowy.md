@@ -3,7 +3,6 @@
 **Autor:**          Monika Campoli  
 **Nr albumu:**      163319  
 **Data:**           26.04.2026  
-**Repozytorium:**   https://github.com/MCampoli/linux-hardening
 
 ---
 
@@ -21,6 +20,8 @@ Raport przedstawia proces audytu bezpieczeństwa systemu Debian 13 oraz wdrożen
 | **Warnings**          | 1                | **0**         | usunięty   |
 | **Suggestions**       | 47               | 31            | −16        |
 | **Tests performed**   | 251              | 262           | +11        |
+
+**Wnioski:** Wzrost o 19 punktów oznacza poprawę bezpieczeństwa o ~30% w skali Lynis. System przeszedł z poziomu *"wymaga poprawy"* do *"przyzwoicie zabezpieczony"*.
 
 ### Szczegółowe wyniki
 
@@ -46,12 +47,62 @@ Raport przedstawia proces audytu bezpieczeństwa systemu Debian 13 oraz wdrożen
 
 ---
 
+## 3. Szczegółowe porównanie obszarów
+
+### 🔥 Obszar 1: Firewall i sieć
+
+| Problem (przed)                   | Status (po)                  | Efekt                        |
+|-----------------------------------|------------------------------|------------------------------|
+| Brak firewalla                    | Firewall aktywny (UFW)       | Pierwsza linia obrony        |
+| Brak reguł w iptables             | 67 reguł w iptables/nftables | Firewall poprawnie skonfigurowany |
+| Jeden serwer DNS (warning)        | Dwa DNS (8.8.8.8, 8.8.4.4)   | Warning usunięty, system odporny na awarię |
+| Brak ochrony przed atakami na SSH | Fail2ban aktywny             |    Blokowanie brute-force    |
+
+### 🔥 Obszar 2: Hardening konfiguracji (SSH, PAM)
+
+| Problem (przed)                              | Status (po)        | Efekt                       |
+|----------------------------------------------|--------------------|-----------------------------|
+| SSH na porcie 22                             | SSH na porcie 2222 | Redukcja skanowania         |
+| Brak limitu prób logowania                   | MaxAuthTries 3     | 3 próby, potem odrzucenie   |
+| X11Forwarding, AllowAgentForwarding włączone | Wyłączone (no)     | Mniejsza powierzchnia ataku |
+| LogLevel INFO                                | LogLevel VERBOSE   | Więcej informacji w logach  |
+| Brak polityki haseł (PAM)                    | minlen=10          | Hasło min. 10 znaków        |
+| Brak ostrzeżenia przed logowaniem            | Login banner       | Ostrzeżenie prawne          |
+
+### 🔥 Obszar 3: Monitoring i integralność
+
+| Nowość (po)           | Efekt                                                                   |
+|-----------------------|-------------------------------------------------------------------------|
+| Auditd z regułami     | Logowanie zmian w /etc/passwd, /etc/shadow, /etc/ssh/sshd_config        |
+| AIDE z bazą danych    | Wykrywanie nieautoryzowanych zmian plików                               |
+| Rsyslog aktywny       | Centralne zarządzanie logami                                            |   
+
+### 🔥 Obszar 4: Jądro i system
+
+| Problem (przed)                  | Status (po)                  | Efekt                         |
+|----------------------------------|------------------------------|-------------------------------|
+| Niezabezpieczone parametry jądra | Większość parametrów OK      | Ochrona przed spoofingiem     |
+| Brak automatycznych aktualizacji | Unattended-upgrades włączone | Automatyczne łatanie          |
+| Brak ochrony /tmp                | Sticky bit (drwxrwxrwt)      | Użytkownicy nie usuwają cudzych plików |
+
+---
+
+## 4. Wpływ poszczególnych poprawek na wynik
+
+| Kategoria                                      | Wpływ na wynik | Realny efekt bezpieczeństwa      |
+|------------------------------------------------|----------------|----------------------------------|
+| Sieć & Firewall (UFW, DNS)                     | +3–5 pkt       | Ochrona przed atakami z zewnątrz |
+| Konfiguracja usług (SSH, PAM)                  | +5–7 pkt       | Trudniejsze włamanie przez SSH, silne hasła |
+| Monitoring i logi (Auditd, AIDE, Rsyslog)      | +3–5 pkt       | Wykrywalność włamań              |
+| Hardening systemu (kernel, /tmp, auto-updates) | +3–5 pkt       | System sam się chroni i łatana   |
+
+
 ## 3. Pełne ścieżki mitygacji (11 FIX)
 
 ### 🔧 FIX-001 – UFW (firewall)
 
 **Identyfikator**            FIX-002 
-**Opis zmiany**              Instalacja i konfiguracja firewalla UFW; domyślnie blokuj przychodzące, zezwól na SSH 
+**Opis zmiany**              Instalacja i konfiguracja firewalla UFW; domyślnie blokuj przychodzące,  zezwól na SSH 
 **Test**                     `ufw status verbose` 
 **Wynik**                     Status: active, default deny incoming, allow 2222/tcp
 **Pełna ścieżka mitygacji**  `apt update` → `apt install ufw -y` → `ufw default deny incoming` → `ufw default allow outgoing` → `ufw allow 2222/tcp` → `ufw enable` → `ufw status verbose` |
@@ -186,9 +237,3 @@ Raport przedstawia proces audytu bezpieczeństwa systemu Debian 13 oraz wdrożen
 - [Status UFW](../results/ufw-status.png)
 - [Status final UFW](../results/ufw-ssh-final.png)
 - [Status Fail2ban](../results/fail2ban-sshd.png)
-
----
-
-## 6. Link do repozytorium
-
-[https://github.com/MCampoli/linux-hardening](https://github.com/MCampoli/linux-hardening)
