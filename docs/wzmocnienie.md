@@ -144,7 +144,7 @@ FIX-002 **nie otwiera portu w firewallu** – tylko ustawia SSH na porcie 2222. 
 
 ---
 
-## ✅ Podsumowanie współpracy FIX-001 i FIX-002
+##  Podsumowanie współpracy FIX-001 i FIX-002
 
 | Poprawka          | Co robi                       | Bez drugiej poprawki                |
 |-------------------|-------------------------------|-------------------------------------|
@@ -155,7 +155,7 @@ FIX-002 **nie otwiera portu w firewallu** – tylko ustawia SSH na porcie 2222. 
 
 ---
 
-## ✅ Wpływ na końcowy wynik Lynis
+##  Wpływ na końcowy wynik Lynis
 
 | Obszar              | Przed (Sprint 1) | Po (Sprint 2) |
 |---------------------|------------------|---------------|
