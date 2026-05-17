@@ -1,15 +1,5 @@
 # Hardening Linuxa – Projekt bezpieczeństwa
 
-## 1. Skład zespołu i role
-
-| Rola          | Osoba                   | Zakres odpowiedzialności                |
-|---------------|-------------------------|-----------------------------------------|
-| Lider         | Monika Campoli (163319) | Planowanie, koordynacja, raport końcowy |
-| Inżynier      | Monika Campoli (163319) | Instalacja, SSH, UFW, Fail2ban, audyt   |
-| Dokumentujący | Monika Campoli (163319) | Logi, screenshoty, prezentacja          |
-
-*Projekt realizowany samodzielnie – wszystkie role pełni jedna osoba.*
-
 ## 2. Temat
 Audyt i hardening bezpieczeństwa systemu Linux (Debian).
 
@@ -25,7 +15,7 @@ Projekt ma na celu wzmocnienie bezpieczeństwa serwera Debian poprzez audyt syst
 - Lynis – audyt bezpieczeństwa systemu
 - Ansible – automatyzacja konfiguracji
 
-## Sprint 1  - Pierwszy audyt bezpieczeństwa Lynis
+## Pierwszy audyt bezpieczeństwa Lynis
 
 ### Cel testu
 Przeprowadzenie wstępnego audytu systemu Debian 13 w celu zidentyfikowania luk i słabych punktów konfiguracji przed rozpoczęciem procesu hardeningu.
@@ -63,7 +53,7 @@ Przeprowadzenie wstępnego audytu systemu Debian 13 w celu zidentyfikowania luk 
 
 3. **Potrzeba iteracyjnego podejścia** – projekt przyjmuje iteracyjny model hardeningu, w którym każda zmiana konfiguracji jest weryfikowana poprzez ponowny audyt systemu.
 
-### Plan na kolejny sprint
+### Plan na kolejne działania.
 
 | Lp. | Zadanie                 | Narzędzie   | Spodziewany efekt                         |
 |-----|-------------------------|-------------|-------------------------------------------|
@@ -80,29 +70,28 @@ Przeprowadzenie wstępnego audytu systemu Debian 13 w celu zidentyfikowania luk 
 - [Log audytu](results/1.lynis.log)
 
 
-## Sprint 2 – Hardening systemu (11 poprawek)
+## Hardening systemu (11 poprawek)
 
-### Cel sprintu
+### Cel 
 Wdrożenie rzeczywistych zabezpieczeń systemu na podstawie wyników audytu ze Sprintu 1 oraz podniesienie wyniku Lynis do poziomu 80+.
 
 ### Wprowadzone poprawki – lista
 
-| ID          | Obszar                    | Opis zmiany                                               |
-|-------------|---------------------------|-----------------------------------------------------------|
-| **FIX-001** | UFW (firewall)            | Instalacja i konfiguracja zapory; domyślnie blokuj ruch przychodzący, otwarty tylko SSH (2222)                                                                |
-| **FIX-002** | Hardening SSH             | Zmiana portu na 2222, ograniczenie prób logowania, wyłączenie X11Forwarding i forwarding                                                                 |
-| **FIX-003** | Fail2ban                  | Włączenie ochrony SSH i automatyczna blokada IP po błędnych logowaniach                                                                                  |
-| **FIX-004** | Automatyczne aktualizacje | Włączenie unattended-upgrades dla aktualizacji bezpieczeństwa                                                                                        |
-| **FIX-005** | Kernel hardening          | Zastosowanie sysctl: ochrona przed spoofingiem i wzmocnienie bezpieczeństwa sieci                                                                      |
-| **FIX-006** | /tmp hardening            | Aktywacja sticky bit w /tmp i /var/tmp                    |
-| **FIX-007** | Login banner              | Dodanie komunikatu bezpieczeństwa (/etc/issue, /etc/issue.net)                                                                                                  |
-| **FIX-008** | Auditd                    | Monitorowanie zmian w plikach systemowych (np. passwd, shadow, sshd_config)                                                                                  |
-| **FIX-009** | PAM (silne hasła)         | Wymuszenie minimalnej długości hasła (10 znaków)          |
-| **FIX-010** | Rsyslog                   | Pełne logowanie systemowe (auth, syslog, kern)            |
-| **FIX-011** | AIDE                      | Monitorowanie integralności plików systemowych            |
+| ID          | Obszar                    | Opis zmiany                                                                                    |
+|-------------|---------------------------|------------------------------------------------------------------------------------------------|
+| **FIX-001** | UFW (firewall)            | Instalacja i konfiguracja zapory; domyślnie blokuj ruch przychodzący, otwarty tylko SSH (2222) |
+| **FIX-002** | Hardening SSH             | Zmiana portu na 2222, ograniczenie prób logowania, wyłączenie X11Forwarding i forwarding       |
+| **FIX-003** | Fail2ban                  | Włączenie ochrony SSH i automatyczna blokada IP po błędnych logowaniach                        |
+| **FIX-004** | Automatyczne aktualizacje | Włączenie unattended-upgrades dla aktualizacji bezpieczeństwa                                  |
+| **FIX-005** | Kernel hardening          | Zastosowanie sysctl: ochrona przed spoofingiem i wzmocnienie bezpieczeństwa sieci              |
+| **FIX-006** | /tmp hardening            | Aktywacja sticky bit w /tmp i /var/tmp                                                         |
+| **FIX-007** | Login banner              | Dodanie komunikatu bezpieczeństwa (/etc/issue, /etc/issue.net)                                 |
+| **FIX-008** | Auditd                    | Monitorowanie zmian w plikach systemowych (np. passwd, shadow, sshd_config)                    |
+| **FIX-009** | PAM (silne hasła)         | Wymuszenie minimalnej długości hasła (10 znaków)                                               |
+| **FIX-010** | Rsyslog                   | Pełne logowanie systemowe (auth, syslog, kern)                                                 |
+| **FIX-011** | AIDE                      | Monitorowanie integralności plików systemowych                                                 |
 
-📌 *Szczegółowe ścieżki mitygacji (pełne komendy, testy, wyniki) znajdują się w pliku `/docs/raport-koncowy.md`.*
-
+*Szczegółowe ścieżki mitygacji (pełne komendy, testy, wyniki) znajdują się w pliku `/docs/raport-koncowy.md`.*
 
 ## Wynik końcowy (po hardeningu)
 
@@ -140,7 +129,7 @@ Wdrożenie rzeczywistych zabezpieczeń systemu na podstawie wyników audytu ze S
 - [Logi](results/sprint2-lynis.log)
 - [Log audytu](results/2.lynis-raport.txt)
 
-## Sprint 3 – Automatyzacja audytu Lynis
+## Automatyzacja audytu Lynis
 
 ### Cel
 
