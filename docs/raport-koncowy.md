@@ -1,14 +1,8 @@
 # Raport końcowy – Audyt i hardening systemu Debian 13
 
-**Autor:**          Monika Campoli  
-**Nr albumu:**      163319  
-**Data:**           26.04.2026  
-
----
-
 ## 1. Cel i zakres raportu
 
-Raport przedstawia proces audytu bezpieczeństwa systemu Debian 13 oraz wdrożenie 11 poprawek (hardening), które doprowadziły do podniesienia wyniku Lynis z **63/100** do **82/100** oraz wyeliminowania wszystkich warningów.
+Raport przedstawia proces audytu bezpieczeństwa systemu Debian 13 oraz wdrożenie 11 poprawek, które doprowadziły do podniesienia wyniku Lynis z **63/100** do **82/100** oraz wyeliminowania wszystkich warningów.
 
 ---
 
@@ -51,12 +45,12 @@ Raport przedstawia proces audytu bezpieczeństwa systemu Debian 13 oraz wdrożen
 
 ### 🔥 Obszar 1: Firewall i sieć
 
-| Problem (przed)                   | Status (po)                  | Efekt                        |
-|-----------------------------------|------------------------------|------------------------------|
-| Brak firewalla                    | Firewall aktywny (UFW)       | Pierwsza linia obrony        |
-| Brak reguł w iptables             | 67 reguł w iptables/nftables | Firewall poprawnie skonfigurowany |
+| Problem (przed)                   | Status (po)                  | Efekt                                      |
+|-----------------------------------|------------------------------|--------------------------------------------|
+| Brak firewalla                    | Firewall aktywny (UFW)       | Pierwsza linia obrony                      |
+| Brak reguł w iptables             | 67 reguł w iptables/nftables | Firewall poprawnie skonfigurowany          |
 | Jeden serwer DNS (warning)        | Dwa DNS (8.8.8.8, 8.8.4.4)   | Warning usunięty, system odporny na awarię |
-| Brak ochrony przed atakami na SSH | Fail2ban aktywny             |    Blokowanie brute-force    |
+| Brak ochrony przed atakami na SSH | Fail2ban aktywny             | Blokowanie brute-force                     |
 
 ### 🔥 Obszar 2: Hardening konfiguracji (SSH, PAM)
 
@@ -89,12 +83,12 @@ Raport przedstawia proces audytu bezpieczeństwa systemu Debian 13 oraz wdrożen
 
 ## 4. Wpływ poszczególnych poprawek na wynik
 
-| Kategoria                                      | Wpływ na wynik | Realny efekt bezpieczeństwa      |
-|------------------------------------------------|----------------|----------------------------------|
-| Sieć & Firewall (UFW, DNS)                     | +3–5 pkt       | Ochrona przed atakami z zewnątrz |
+| Kategoria                                      | Wpływ na wynik | Realny efekt bezpieczeństwa                 |
+|------------------------------------------------|----------------|---------------------------------------------|
+| Sieć & Firewall (UFW, DNS)                     | +3–5 pkt       | Ochrona przed atakami z zewnątrz            |
 | Konfiguracja usług (SSH, PAM)                  | +5–7 pkt       | Trudniejsze włamanie przez SSH, silne hasła |
-| Monitoring i logi (Auditd, AIDE, Rsyslog)      | +3–5 pkt       | Wykrywalność włamań              |
-| Hardening systemu (kernel, /tmp, auto-updates) | +3–5 pkt       | System sam się chroni i łatana   |
+| Monitoring i logi (Auditd, AIDE, Rsyslog)      | +3–5 pkt       | Wykrywalność włamań                         |
+| Hardening systemu (kernel, /tmp, auto-updates) | +3–5 pkt       | System sam się chroni i łatana              |
 
 
 ## 3. Pełne ścieżki mitygacji (11 FIX)
