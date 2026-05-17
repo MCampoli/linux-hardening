@@ -1,11 +1,5 @@
-# Raport automatyzacji – automatyczny audyt Lynis (Sprint 3)
+# Raport automatyzacji – automatyczny audyt Lynis
  
-**Autor:**          Monika Campoli  
-**Nr albumu:**      163319  
-**Data:**           01.05.2026  
-
----
-
 ## 1. Cel automatyzacji
 
 Celem zadania było zautomatyzowanie czynności wcześniej wykonywanej ręcznie – cotygodniowego audytu bezpieczeństwa systemu Debian 13 za pomocą narzędzia Lynis. Automatyzacja miała na celu:
@@ -108,10 +102,10 @@ dodana linia:
 
 ## Wyjaśnienie zapisu CRON
 
-|Pole	|Wartość    |Znaczenie                 |
+|Pole  	|Wartość    |Znaczenie                 |
 |-------|-----------|--------------------------|
-| 1	    | 59    	|59 minuta                 |
-| 2    	| 23	    |23 godzina (11:59 PM)     |
+| 1	    | 59    	   |59 minuta                 |
+| 2    	| 23	       |23 godzina (11:59 PM)     |
 | 3	    | *	        |każdy dzień miesiąca      |
 | 4	    | *	        |każdy miesiąc             |
 | 5	    | 0	        |niedziela (0 = niedziela) |
@@ -120,10 +114,10 @@ Oznacza to: Skrypt uruchamia się automatycznie w każdą niedzielę o 23:59.
 
 ## Pomiar efektu – porównanie czasu
 
-| Metoda	    | Czas aktywnej pracy człowieka | Uwagi                                          |
+| Metoda	       | Czas aktywnej pracy człowieka | Uwagi                                          |
 |---------------|-------------------------------|------------------------------------------------|
-| Ręcznie       |  ~120-180 sekund	            | Wpisanie komendy, czekanie, kopiowanie wyników |
-| Auto. (CRON)	|   0 sekund	                | Skrypt działa w tle, człowiek nie traci czasu  |
+| Ręcznie       |  ~120-180 sekund	             | Wpisanie komendy, czekanie, kopiowanie wyników |
+| Auto. (CRON)	 |   0 sekund	                   | Skrypt działa w tle, człowiek nie traci czasu  |
 
 ### Przykładowy czas wykonania (z pliku .time)
 
@@ -136,17 +130,17 @@ Data audytu: Fri May 1 20:53:50 CEST 2026
 
 | Okres	                | Oszczędność   |
 |-----------------------|---------------|
-| Tygodniowo	        | ~2-3 minuty   |
+| Tygodniowo	           | ~2-3 minuty   |
 | Rocznie (52 tygodnie) | ~2-3 godziny  |
 
 ## Podsumowanie
 
-Zadanie Sprint #3 – automatyzacja audytu Lynis – zostało wykonane w pełni:
+Automatyzacja audytu Lynis:
 
-- Wybrano czynność (audyt Lynis)
-- Przygotowano skrypt auto-audit.sh
-- Skrypt uruchamiany przez CRON co tydzień
-- Pomiar czasu wykonania (155 sekund)
-- Porównanie z czasem ręcznym (0 vs 120-180 sekund)
+- Wybrano czynność (audyt Lynis).
+- Przygotowano skrypt auto-audit.sh.
+- Skrypt uruchamiany przez CRON co tydzień.
+- Pomiar czasu wykonania (155 sekund).
+- Porównanie z czasem ręcznym (0 vs 120-180 sekund).
 - Dokumentacja w repozytorium.
 
