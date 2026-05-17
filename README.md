@@ -1,15 +1,5 @@
 # Hardening Linuxa – Projekt bezpieczeństwa
 
-## 1. Skład zespołu i role
-
-| Rola          | Osoba                   | Zakres odpowiedzialności                |
-|---------------|-------------------------|-----------------------------------------|
-| Lider         | Monika Campoli (163319) | Planowanie, koordynacja, raport końcowy |
-| Inżynier      | Monika Campoli (163319) | Instalacja, SSH, UFW, Fail2ban, audyt   |
-| Dokumentujący | Monika Campoli (163319) | Logi, screenshoty, prezentacja          |
-
-*Projekt realizowany samodzielnie – wszystkie role pełni jedna osoba.*
-
 ## 2. Temat
 Audyt i hardening bezpieczeństwa systemu Linux (Debian).
 
@@ -101,7 +91,7 @@ Wdrożenie rzeczywistych zabezpieczeń systemu na podstawie wyników audytu ze S
 | **FIX-010** | Rsyslog                   | Pełne logowanie systemowe (auth, syslog, kern)            |
 | **FIX-011** | AIDE                      | Monitorowanie integralności plików systemowych            |
 
-📌 *Szczegółowe ścieżki mitygacji (pełne komendy, testy, wyniki) znajdują się w pliku `/docs/raport-koncowy.md`.*
+*Szczegółowe ścieżki mitygacji (pełne komendy, testy, wyniki) znajdują się w pliku `/docs/raport-koncowy.md`.*
 
 
 ## Wynik końcowy (po hardeningu)
